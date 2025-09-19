@@ -40,15 +40,59 @@ header .logo {
     font-size: 24px;
 }
 
+header nav {
+    display: flex;
+    gap: 20px;
+}
+
 header nav a {
     color: white;
     text-decoration: none;
-    margin-left: 25px;
     transition: color 0.3s;
 }
 
 header nav a:hover {
     color: #FFD3A0;
+}
+
+/* Hamburger menu button */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+    header nav {
+        display: none;
+        flex-direction: column;
+        background: #ED7014;
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    header nav.show {
+        display: flex;
+    }
+    .menu-toggle {
+        display: flex;
+    }
 }
 
 /* Hero Section */
@@ -155,6 +199,7 @@ section h2 {
     list-style-type: disc;
     padding-left: 0;
     text-align: center;
+    margin-top: 5px;
 }
 
 /* Opening Hours */
@@ -215,7 +260,12 @@ button:hover {
 
 <header>
     <div class="logo">Orange Seamstress</div>
-    <nav>
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav id="navLinks">
         <a href="#hero">Home</a>
         <a href="#about">About</a>
         <a href="#services">Services & Prices</a>
@@ -309,6 +359,13 @@ button:hover {
 </footer>
 
 <script>
+// Hamburger menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+});
+
 // Seamless right-to-left carousel
 const carousel = document.getElementById('carousel');
 const slides = document.querySelectorAll('.team-member');
